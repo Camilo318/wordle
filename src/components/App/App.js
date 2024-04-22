@@ -17,7 +17,7 @@ function App() {
           addGuess={guess => {
             const newGuesses = [
               ...userGuesses,
-              { guess: guess, id: crypto.randomUUID() }
+              { word: guess, id: crypto.randomUUID() }
             ]
             setUserGuesses(newGuesses)
           }}
