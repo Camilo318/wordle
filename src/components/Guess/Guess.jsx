@@ -1,13 +1,14 @@
 import React from 'react'
+import { range } from '../../utils'
 
 function Guess({ word }) {
   return (
     <p className='guess'>
-      <span className='cell'>{word?.[0] || ''}</span>
-      <span className='cell'>{word?.[1] || ''}</span>
-      <span className='cell'>{word?.[2] || ''}</span>
-      <span className='cell'>{word?.[3] || ''}</span>
-      <span className='cell'>{word?.[4] || ''}</span>
+      {range(5).map(pos => (
+        <span key={pos} className='cell'>
+          {word ? word[pos] : ''}
+        </span>
+      ))}
     </p>
   )
 }
