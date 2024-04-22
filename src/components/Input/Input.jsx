@@ -1,23 +1,26 @@
 import React from 'react'
 
-function Input({ currentValue, setCurrentValue }) {
+function Input({ addGuess }) {
+  const [userInput, setUserInput] = React.useState('')
+
   return (
     <form
       className='guess-input-wrapper'
       onSubmit={e => {
         e.preventDefault()
-        if (currentValue.length === 0) return
-        console.log(currentValue)
-        setCurrentValue('')
+        if (userInput.length === 0) return
+        console.log(userInput)
+        addGuess(userInput)
+        setUserInput('')
       }}>
       <label htmlFor='guess-input'>Enter guess:</label>
       <input
         id='guess-input'
         type='text'
-        value={currentValue}
+        value={userInput}
         onChange={e => {
           const upperCaseText = e.target.value.toLocaleUpperCase()
-          setCurrentValue(upperCaseText)
+          setUserInput(upperCaseText)
         }}
         maxLength={5}
         pattern='[A-Z]{5}'
