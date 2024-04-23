@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Input({ addGuess }) {
+function Input({ addGuess, gameFinished }) {
   const [userInput, setUserInput] = React.useState('')
 
   return (
@@ -15,6 +15,7 @@ function Input({ addGuess }) {
       }}>
       <label htmlFor='guess-input'>Enter guess:</label>
       <input
+        disabled={gameFinished}
         id='guess-input'
         type='text'
         value={userInput}
