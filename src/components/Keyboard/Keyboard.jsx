@@ -29,13 +29,32 @@ const keyboard = [
   { id: 'M', label: 'M' }
 ]
 
+const STATUS_RANKS = {
+  correct: 1,
+  misplaced: 2,
+  incorrect: 3
+}
+
 function Keyboard({ currentGuesses }) {
   const keyboardLookup = currentGuesses
     .flat()
-    .reduce(
-      (acc, { letter, status }) => ({ ...acc, [letter]: status }),
-      {}
-    )
+    .reduce((acc, { letter, status }) => {
+      const currentStatus = acc[letter]
+
+      if (currentStatus === undefined) {
+        acc[letter] = status
+        return acc
+      }
+
+      const currentStatusRank = STATUS_RANKS[currentStatus]
+      const newStatusRank = STATUS_RANKS[status]
+
+      if (newStatusRank < currentStatusRank) {
+        acc[letter] = status
+      }
+
+      return acc
+    }, {})
 
   return (
     <div className='keyboard'>
